@@ -1,42 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui_design_task/views/home/model/benner_model.dart';
 
-import 'bennerPagView.dart';
-
-final List<Widget> pages = [
-  benner(
-    "Flash Offer",
-    "We are here with the best\ndeserts intown.",
-    "Order >",
-    "assets/logo1.png",
-    "assets/burgers.png",
-    LinearGradient(
-      colors: [Color(0xffFF9F06), Color(0xffFFE1B4)],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    ),
-  ),
-  benner(
-    "Flash Offer",
-    "We are here with the best\ndeserts intown.",
-    "Order >",
-    "assets/logo2.png",
-    "assets/Pizza1.png",
-    LinearGradient(
-      colors: [Color(0xFF060AFF), Color(0xFFB4C8FF)],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    ),
-  ),
-  benner(
-    "Flash Offer",
-    "We are here with the best\ndeserts intown.",
-    "Order >",
-    "assets/logo1.png",
-    "assets/burgers.png",
-    LinearGradient(
-      colors: [Color(0xFF06FF30), Color(0xFFB4FFD3)],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    ),
-  ),
+List<BannerModel> pages=[
+  BannerModel("assets/logo1.png", "Flash Offer", "We are here with the best\ndeserts intown.", "assets/burgers.png", Color(0xffFF9F06), Color(0xffFFE1B4)),
+  BannerModel( "assets/logo2.png", "Flash Offer", "We are here with the best\ndeserts intown.", "assets/Pizza1.png", Color(0xFF060AFF), Color(0xFFB4C8FF)),
+  BannerModel("assets/logo1.png", "Flash Offer", "We are here with the best\ndeserts intown.", "assets/burgers.png", Color(0xFF06FF30), Color(0xFFB4FFD3))
 ];
+

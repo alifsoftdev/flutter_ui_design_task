@@ -11,9 +11,16 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import 'controller/AuthController.dart';
 import '../../widgets/customTextFormField.dart';
+import 'widget/custom_alert.dart';
 
-class SignIn extends StatelessWidget {
-  final AuthController controller = AuthController();
+class SignIn extends StatefulWidget {
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+  //final AuthController controller = AuthController();
+  final AuthController controller = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,30 +31,34 @@ class SignIn extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             children: [
-              CustomTextField(
-                titleText: "Email address",
-                controller: controller.usernameControllerIn.value,
-                hintText: 'Eg namaemail@emailkamu.com',
-                borderRadius: 10.0,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a Eg namaemail@emailkamu.com';
-                  }
-                  return null;
-                },
+              Obx(
+                () => CustomTextField(
+                  titleText: "Username",
+                  controller: controller.usernameControllerIn.value,
+                  hintText: 'Enter username',
+                  borderRadius: 10.0,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter username';
+                    }
+                    return null;
+                  },
+                ),
               ),
               addH(10.h),
-              CustomTextField(
-                titleText: "Password",
-                controller: controller.passwordControllerIn.value,
-                hintText: '**** **** ****',
-                borderRadius: 10.0,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a Password';
-                  }
-                  return null;
-                },
+              Obx(
+                () => CustomTextField(
+                  titleText: "Password",
+                  controller: controller.passwordControllerIn.value,
+                  hintText: '**** **** ****',
+                  borderRadius: 10.0,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a Password';
+                    }
+                    return null;
+                  },
+                ),
               ),
               addH(10.h),
               Padding(
@@ -69,49 +80,67 @@ class SignIn extends StatelessWidget {
                 ),
               ),
               addH(20.h),
-              CustomBtn(
-                  onPressedFn: () async {
-                    /*if (controller.formKey.currentState!.validate()) {
-                      // Form is valid, perform your action here
-                      print('Form is valid');
-                    }*/
-                    bool isValid = await controller.dbHelper.value.verifyUser(
-                        controller.usernameControllerIn.value.text,
-                        controller.passwordControllerIn.value.text);
-                    if (isValid) {
-                      // Navigate to home screen or perform the desired action
-                      print('Login successful');
-                      Get.toNamed(navController);
-                    } else {
-                      // Show error message
-                      print('Invalid credentials');
-                      showDialog(
-                        context: context,
-                        builder: (context) => Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Text("Invalid credentials"),
-                            )),
-                      );
-                    }
-                  },
-                  btnTxt: "Login",
-                  txtColor: controller.formFill == true
-                      ? AppColor.white
-                      : AppColor.grey,
-                  btnColor: controller.formFill == true
-                      ? AppColor.green
-                      : AppColor.greyLite),
+              Obx(
+                () => CustomBtn(
+                    onPressedFn: () async {
+                      if (controller.formKey.currentState!.validate()) {
+                        // Form is valid, perform your action here
+                        print('Form is valid');
+                      }
+                      String enteredName= "Kawser";//controller.nameControllerUp.value.text;
+                      String enteredUsername = controller.usernameControllerIn.value.text;
+                      String enteredPassword = controller.passwordControllerIn.value.text;
+                      if (enteredUsername == "user" && enteredPassword == "12345678") {
+                        print('Sign in successful!');
+                        controller.addUser(enteredName, enteredUsername, enteredPassword);
+                        controller.formKey.currentState!.reset();
+                        showSignInSuccess(context);
+                        // Replace the following line with your desired logic upon successful login
+                        print('Performing actions for successful sign-in, like navigating to a new screen.');
+                      } else {
+                        print('Invalid credentials');
+                      }
+                    },
+                    btnTxt: "Login",
+                    txtColor: (controller
+                                .usernameControllerIn.value.text.isEmpty ||
+                            controller.passwordControllerIn.value.text.isEmpty)
+                        ? AppColor.grey
+                        : AppColor.white,
+                    btnColor: (controller
+                                .usernameControllerIn.value.text.isEmpty ||
+                            controller.passwordControllerIn.value.text.isEmpty)
+                        ? AppColor.greyLite
+                        : AppColor.green),
+              ),
               const Divider(
                 indent: 70,
                 endIndent: 70,
               ),
               CustomBtn(
-                  onPressedFn: () {},
+                  onPressedFn: () {
+                    String newName = "Google Name";
+                    String newUsername = "Google username";
+                    String newPassword = "Google password";
+
+                    if (newName.isEmpty ||
+                        newUsername.isEmpty ||
+                        newPassword.isEmpty) {
+                      print('Name, username, and password cannot be empty');
+                    } else {
+                      bool signUpSuccess =
+                          controller.signUp(newName, newUsername, newPassword);
+
+                      if (signUpSuccess) {
+                        print('Sign up successful!');
+                        // Perform actions for successful sign-up (e.g., navigate to another screen)
+                      } else {
+                        print(
+                            'Username already exists. Please choose a different username.');
+                      }
+                      showSignUpSuccess(context);
+                    }
+                  },
                   btnIcon: "assets/icons/ic_google.svg",
                   btnTxt: "Login with Google",
                   txtColor: AppColor.black,

@@ -59,9 +59,11 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Obx(
                     () => VioletButton(
-                      textColor: value == false ?Color(0xffD1FAE5): AppColor.green ,
+                        textColor:
+                            value == false ? Color(0xffD1FAE5) : AppColor.green,
                         title: "Create Account",
-                        color:value == false ? AppColor.green : Color(0xffD1FAE5),
+                        color:
+                            value == false ? AppColor.green : Color(0xffD1FAE5),
                         onAction: () {
                           value.value = false;
                           controller.authCheck(true);
@@ -73,38 +75,57 @@ class WelcomeScreen extends StatelessWidget {
                             ),
                             context: context,
                             builder: (context) {
-                              return SizedBox(
-                                height: 560.h,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.all(20.r),
-                                      height: 6.h,
-                                      width: 60.w,
-                                      decoration: BoxDecoration(
-                                        color: Color(0XFFD2D4D8),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                              return SingleChildScrollView(
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                  child: SizedBox(
+                                    height: 560.h,
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          onTap:(){
+                                            Get.back();
+                                          },
+                                      child: Container(
+                                            margin: EdgeInsets.all(20.r),
+                                            height: 6.h,
+                                            width: 60.w,
+                                            decoration: BoxDecoration(
+                                              color: Color(0XFFD2D4D8),
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        ),
+                                        addH(10.h),
+                                        Obx(
+                                          () => CustomTabBar(
+                                            tabOne: () {
+                                              controller.authCheck(true);
+                                            },
+                                            tabOTwo: () {
+                                              controller.authCheck(false);
+                                            },
+                                            tabColorOne:
+                                                controller.authValue == true
+                                                    ? AppColor.green
+                                                    : AppColor.grey,
+                                            tabColorTwo:
+                                                controller.authValue == false
+                                                    ? AppColor.green
+                                                    : AppColor.grey,
+                                          ),
+                                        ),
+                                        addH(30.h),
+                                        Obx(
+                                          () => SizedBox(
+                                            child: controller.authValue == true
+                                                ? SignUpScreen()
+                                                : SignIn(),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    addH(10.h),
-                                    Obx(
-                                          ()=> CustomTabBar(
-                                        tabOne: () {
-                                          controller.authCheck(true);
-                                        },
-                                        tabOTwo: () {
-                                          controller.authCheck(false);
-                                        },
-                                        tabColorOne:controller.authValue==true? AppColor.green:AppColor.grey,
-                                        tabColorTwo: controller.authValue==false? AppColor.green:AppColor.grey,
-                                      ),
-                                    ),
-                                    addH(30.h),
-                                    Obx(()=> SizedBox(
-                                      child: controller.authValue==true?SignUpScreen():
-                                      SignIn(),),
-                                    )
-                                  ],
+                                  ),
                                 ),
                               );
                             },
@@ -118,60 +139,75 @@ class WelcomeScreen extends StatelessWidget {
                   Obx(
                     () => VioletButton(
                         title: "Login",
-                        textColor: value == true ?Color(0xffD1FAE5): AppColor.green ,
+                        textColor:
+                            value == true ? Color(0xffD1FAE5) : AppColor.green,
                         color:
-                        value == true ? AppColor.green : Color(0xffD1FAE5),
+                            value == true ? AppColor.green : Color(0xffD1FAE5),
                         onAction: () {
                           value.value = true;
                           controller.authCheck(false);
                           return showModalBottomSheet(
-                            isScrollControlled: true,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(35.0)),
-                            ),
-                            context: context,
-                            builder: (context) =>SingleChildScrollView(
-                              child: Container(
-                                child: Padding(
-                                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(20.r),
-                                        height: 6.h,
-                                        width: 60.w,
-                                        decoration: BoxDecoration(
-                                          color: Color(0XFFD2D4D8),
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                      addH(10.h),
-                                      Obx(
-                                            ()=> CustomTabBar(
-                                          tabOne: () {
-                                            controller.authCheck(true);
-                                          },
-                                          tabOTwo: () {
-                                            controller.authCheck(false);
-                                          },
-                                          tabColorOne:controller.authValue==true? AppColor.green:AppColor.grey,
-                                          tabColorTwo: controller.authValue==false? AppColor.green:AppColor.grey,
-                                        ),
-                                      ),
-                                      addH(30.h),
-                                      Obx(()=> SizedBox(
-                                        child: controller.authValue==true?SignUpScreen():
-                                        SignIn(),),
-                                      ),
-                                      addH(20.h),
-                                    ],
-                                  ),
-                                ),
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(35.0)),
                               ),
-                            )
-                          );
+                              context: context,
+                              builder: (context) => SingleChildScrollView(
+                                    child: Container(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: MediaQuery.of(context)
+                                                .viewInsets
+                                                .bottom),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.all(20.r),
+                                              height: 6.h,
+                                              width: 60.w,
+                                              decoration: BoxDecoration(
+                                                color: Color(0XFFD2D4D8),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                            ),
+                                            addH(10.h),
+                                            Obx(
+                                              () => CustomTabBar(
+                                                tabOne: () {
+                                                  controller.authCheck(true);
+                                                },
+                                                tabOTwo: () {
+                                                  controller.authCheck(false);
+                                                },
+                                                tabColorOne:
+                                                    controller.authValue == true
+                                                        ? AppColor.green
+                                                        : AppColor.grey,
+                                                tabColorTwo:
+                                                    controller.authValue ==
+                                                            false
+                                                        ? AppColor.green
+                                                        : AppColor.grey,
+                                              ),
+                                            ),
+                                            addH(30.h),
+                                            Obx(
+                                              () => SizedBox(
+                                                child:
+                                                    controller.authValue == true
+                                                        ? SignUpScreen()
+                                                        : SignIn(),
+                                              ),
+                                            ),
+                                            addH(20.h),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ));
                         }),
                   ),
                 ],

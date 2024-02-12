@@ -10,7 +10,6 @@ import '../../../const/appColor.dart';
 import '../../../const/appStyle.dart';
 import '../../../const/data/homedata.dart';
 import '../../../route/route.dart';
-import '../../../const/data/bennerPagView.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -110,7 +109,67 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CarouselSlider(
-                  items: pages,
+                  items: pages
+                      .map((item) => Padding(
+                    padding:  EdgeInsets.only(right: 5.w,left: 5.w),
+                    child: Container(
+                      height: 120.h,
+                      width: 280.w,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [pages[currentPage].colorOne, pages[currentPage].colorTwo],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(28.r),
+                      ),
+                      child: Stack(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        children: [
+                          Positioned(
+                              right: -50.w,
+                              bottom: 10.h,
+                              child: Image.asset(pages[currentPage].foodImage,height: 117,
+                                width: 207,)),
+                          Padding(
+                            padding: EdgeInsets.only(top: 12.h, left: 20.w,bottom: 12.h),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Image.asset(
+                                    pages[currentPage].logo,
+                                    height: 26,
+
+                                  ),
+                                  Text(
+                                      pages[currentPage].offer,
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                  Text(
+                                    pages[currentPage].sortDescribe,
+                                    style: TextStyle(fontSize: 7.sp, fontWeight: FontWeight.w500,color: Colors.white),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Order",
+                                        style: TextStyle(fontSize: 8.sp,fontWeight: FontWeight.bold, color: Colors.white),
+                                      ),addW(3.w
+                                      ), Icon(Icons.arrow_forward_ios,color: AppColor.white,size: 7,),
+                                    ],
+                                  ),
+                                ]),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  )
+                      .toList(),
                   options: CarouselOptions(
                       height: 120,
                       enlargeCenterPage: true,

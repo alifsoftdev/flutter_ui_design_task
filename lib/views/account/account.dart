@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_ui_design_task/route/route.dart';
+import 'package:flutter_ui_design_task/views/auth/controller/AuthController.dart';
+import 'package:get/get.dart';
 
 import '../../const/appColor.dart';
 import '../../const/appStyle.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
+
+  AuthController controller=Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -16,40 +20,42 @@ class AccountScreen extends StatelessWidget {
           padding: EdgeInsets.only(top: 30.h,left: 20.w,right: 20.w),
           child: Column(
             children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 70.h,
-                  decoration: BoxDecoration(
-                      color: AppColor.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color(0xFFECECEC),
-                            spreadRadius: 2,
-                            offset: Offset(2, 2),
-                            blurRadius: 3
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(11.r)),
-                  child: ListTile(
+              Container(
+                height: 70.h,
+                decoration: BoxDecoration(
+                    color: AppColor.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0xFFECECEC),
+                          spreadRadius: 2,
+                          offset: Offset(2, 2),
+                          blurRadius: 3
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(11.r)),
+                child: ListTile(
                     leading: CircleAvatar(
                       backgroundColor: AppColor.white,
                       child: Image.asset(
                           "assets/profile.png"),
                     ),
-                    title: Text(
-                      "Sadek Hossen",
-                      style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppColor.fontColor),
+                    title: Obx(
+                          ()=> Text(
+                        controller.users[2].username??"Name empty",
+                        style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColor.fontColor),
+                      ),
                     ),
-                    subtitle: Text(
-                      "sadekbranding@gmail.com",
-                      style: TextStyle(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey),
+                    subtitle: Obx(
+                          ()=> Text(
+                            controller.users[2].username??"username empty",
+                        style: TextStyle(
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.grey),
+                      ),
                     ),
                     trailing: Stack(
                       clipBehavior: Clip.none,
@@ -59,16 +65,15 @@ class AccountScreen extends StatelessWidget {
                           child: SvgPicture.asset("assets/icons/notification.svg"),
                         ),
                         Positioned(
-                          top: 3.h,
+                            top: 3.h,
                             right: -3.w,
                             child: CircleAvatar(
-                          radius: 6.r,
-                          backgroundColor: Color(0xFFEB4646),
+                              radius: 6.r,
+                              backgroundColor: Color(0xFFEB4646),
                               child: Text("3",style: TextStyle(color: AppColor.white,fontSize: 8.sp,fontWeight: FontWeight.w500),),
-                        ))
+                            ))
                       ],
                     )
-                  ),
                 ),
               ),
               SizedBox(
@@ -126,7 +131,10 @@ class AccountScreen extends StatelessWidget {
               ),
               SizedBox(height: 40,),
               InkWell(
-                onTap: (){},
+                onTap: ()async{
+                    await controller.deleteUser();
+                    Get.toNamed(welcome);
+                },
                 child: Container(
                   height: 35.h,
                     width: 111.w,
