@@ -1,12 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../helper/db_helper.dart';
+
 class AuthController extends GetxController{
+  Rx<DatabaseHelper> dbHelper = DatabaseHelper().obs;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  Rx<TextEditingController> nameController=TextEditingController().obs;
+  ///Sign In
+  Rx<TextEditingController> usernameControllerIn = TextEditingController().obs;
+  Rx<TextEditingController> passwordControllerIn = TextEditingController().obs;
+  ///signUp
+  Rx<TextEditingController> usernameControllerUp = TextEditingController().obs;
+  Rx<TextEditingController> passwordControllerUp = TextEditingController().obs;
+  Rx<TextEditingController> nameControllerUp=TextEditingController().obs;
   Rx<TextEditingController> emailForForgetPass=TextEditingController().obs;
   RxBool authValue=false.obs;
   RxBool formFill = false.obs;
+
 
 
   void formFillCheck(GlobalKey key){

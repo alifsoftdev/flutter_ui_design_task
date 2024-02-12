@@ -13,7 +13,7 @@ import 'controller/AuthController.dart';
 import '../../widgets/customTextFormField.dart';
 
 class SignIn extends StatelessWidget {
- final AuthController controller = AuthController();
+  final AuthController controller = AuthController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,7 @@ class SignIn extends StatelessWidget {
             children: [
               CustomTextField(
                 titleText: "Email address",
-                //controller: controller.nameController.value,
-
+                controller: controller.usernameControllerIn.value,
                 hintText: 'Eg namaemail@emailkamu.com',
                 borderRadius: 10.0,
                 validator: (value) {
@@ -40,7 +39,7 @@ class SignIn extends StatelessWidget {
               addH(10.h),
               CustomTextField(
                 titleText: "Password",
-                controller: controller.nameController.value,
+                controller: controller.passwordControllerIn.value,
                 hintText: '**** **** ****',
                 borderRadius: 10.0,
                 validator: (value) {
@@ -71,15 +70,42 @@ class SignIn extends StatelessWidget {
               ),
               addH(20.h),
               CustomBtn(
-                  onPressedFn: () {
-                    if (controller.formKey.currentState!.validate()) {
+                  onPressedFn: () async {
+                    /*if (controller.formKey.currentState!.validate()) {
                       // Form is valid, perform your action here
                       print('Form is valid');
+                    }*/
+                    bool isValid = await controller.dbHelper.value.verifyUser(
+                        controller.usernameControllerIn.value.text,
+                        controller.passwordControllerIn.value.text);
+                    if (isValid) {
+                      // Navigate to home screen or perform the desired action
+                      print('Login successful');
+                      Get.toNamed(navController);
+                    } else {
+                      // Show error message
+                      print('Invalid credentials');
+                      showDialog(
+                        context: context,
+                        builder: (context) => Container(
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Text("Invalid credentials"),
+                            )),
+                      );
                     }
                   },
                   btnTxt: "Login",
-                  txtColor:controller.formFill==true? AppColor.white: AppColor.grey,
-                  btnColor:controller.formFill==true? AppColor.green :AppColor.greyLite),
+                  txtColor: controller.formFill == true
+                      ? AppColor.white
+                      : AppColor.grey,
+                  btnColor: controller.formFill == true
+                      ? AppColor.green
+                      : AppColor.greyLite),
               const Divider(
                 indent: 70,
                 endIndent: 70,
@@ -88,7 +114,7 @@ class SignIn extends StatelessWidget {
                   onPressedFn: () {},
                   btnIcon: "assets/icons/ic_google.svg",
                   btnTxt: "Login with Google",
-                  txtColor:AppColor.black ,
+                  txtColor: AppColor.black,
                   btnColor: AppColor.greyLite),
             ],
           ),

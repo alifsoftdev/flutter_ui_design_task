@@ -24,7 +24,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               CustomTextField(
                 titleText: "Full Name",
-                controller: controller.nameController.value,
+                controller: controller.nameControllerUp.value,
                 hintText: 'Enter your full name',
                 borderRadius: 10.0,
                 validator: (value) {
@@ -36,9 +36,9 @@ class SignUpScreen extends StatelessWidget {
               ),
               addH(10.h),
               CustomTextField(
-                titleText: "Email address",
-                controller: controller.nameController.value,
-                hintText: 'Eg namaemail@emailkamu.com',
+                titleText: "Email address / User Name",
+                controller: controller.usernameControllerUp.value,
+                hintText: 'Enter the email or username',
                 borderRadius: 10.0,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -50,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
               addH(10.h),
               CustomTextField(
                 titleText: "Password",
-                controller: controller.nameController.value,
+                controller: controller.passwordControllerUp.value,
                 hintText: '**** **** ****',
                 borderRadius: 10.0,
                 validator: (value) {
@@ -62,11 +62,23 @@ class SignUpScreen extends StatelessWidget {
               ),
               addH(20.h),
               CustomBtn(
-                  onPressedFn: () {
-                    if (_formKey.currentState!.validate()) {
+                  onPressedFn: ()async {
+                    /*if (_formKey.currentState!.validate()) {
                       // Form is valid, perform your action here
                       print('Form is valid');
-                    }
+                    }*/
+
+                    controller.dbHelper.value.insertUser(controller.nameControllerUp.value.text, controller.nameControllerUp.value.text, controller.nameControllerUp.value.text);
+                    print('Invalid credentials');
+                    showDialog(context: context, builder: (context) =>
+                        Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Text("Invalid credentials"),
+                            )),);
                   },
                   btnTxt: "Registration",
                   txtColor:_formKey.runtimeType.isNull ? AppColor.white : AppColor.grey ,
