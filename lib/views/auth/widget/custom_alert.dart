@@ -39,7 +39,7 @@ Future showSignInSuccess(BuildContext context) {
   );
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: Text("Sign up successful"),
+    title: Text("Sign In successful"),
     actions: [
       okButton,
     ],
@@ -49,6 +49,18 @@ Future showSignInSuccess(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return alert;
+    },
+  );
+}
+
+Future showSignInInvalid(BuildContext context) {
+  // show the dialog
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Sign In successful"),
+      );
     },
   );
 }

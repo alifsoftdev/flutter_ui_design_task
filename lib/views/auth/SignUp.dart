@@ -32,6 +32,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Obx(
                 ()=> CustomTextField(
                   titleText: "Full Name",
+                  titleColor: (controller.nameControllerUp.value.text.isEmpty)
+                      ? AppColor.fontColor: AppColor.grey,
                   controller: controller.nameControllerUp.value,
                   hintText: 'Enter your full name',
                   borderRadius: 10.0,
@@ -47,6 +49,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Obx(
                 () => CustomTextField(
                   titleText: "Email address / User Name",
+                  titleColor: (controller.usernameControllerUp.value.text.isEmpty)
+                      ? AppColor.fontColor: AppColor.grey,
                   controller: controller.usernameControllerUp.value,
                   hintText: 'Enter the email or username',
                   borderRadius: 10.0,
@@ -62,6 +66,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Obx(
                 () => CustomTextField(
                   titleText: "Password",
+                  titleColor: (controller.passwordControllerUp.value.text.isEmpty)
+                      ? AppColor.fontColor: AppColor.grey,
                   controller: controller.passwordControllerUp.value,
                   hintText: '**** **** ****',
                   borderRadius: 10.0,

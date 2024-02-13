@@ -37,7 +37,7 @@ class ForgetPassword extends StatelessWidget {
                 ()=> CustomTextField(
                   titleText: "Email address",
                   controller: controller.emailForForgetPass.value,
-                  hintText: 'namaemail@emailkamu.com',
+                  hintText: 'namaemail@gmail.com',
                   borderRadius: 10.0,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -80,8 +80,8 @@ class ForgetPassword extends StatelessWidget {
 
                         },
                         btnTxt: "Submit",
-                        txtColor:(controller.emailForForgetPass.value.text.isEmpty)?AppColor.white:AppColor.grey,
-                        btnColor:(controller.emailForForgetPass.value.text.isEmpty)?AppColor.green:AppColor.greyLite),
+                        txtColor:(controller.emailForForgetPass.value.text.isEmpty)?AppColor.grey:AppColor.white,
+                        btnColor:(controller.emailForForgetPass.value.text.isEmpty)?AppColor.greyLite:AppColor.green),
                   ),
 
                 ],),

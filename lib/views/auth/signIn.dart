@@ -34,6 +34,8 @@ class _SignInState extends State<SignIn> {
               Obx(
                 () => CustomTextField(
                   titleText: "Username",
+                  titleColor: (controller.usernameControllerIn.value.text.isEmpty)
+                      ? AppColor.fontColor: AppColor.grey,
                   controller: controller.usernameControllerIn.value,
                   hintText: 'Enter username',
                   borderRadius: 10.0,
@@ -49,6 +51,8 @@ class _SignInState extends State<SignIn> {
               Obx(
                 () => CustomTextField(
                   titleText: "Password",
+                  titleColor: (controller.passwordControllerIn.value.text.isEmpty)
+                      ?AppColor.fontColor: AppColor.grey,
                   controller: controller.passwordControllerIn.value,
                   hintText: '**** **** ****',
                   borderRadius: 10.0,
@@ -98,6 +102,14 @@ class _SignInState extends State<SignIn> {
                         // Replace the following line with your desired logic upon successful login
                         print('Performing actions for successful sign-in, like navigating to a new screen.');
                       } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              title: Text("Invalid credentials"),
+                            );
+                          },
+                        );
                         print('Invalid credentials');
                       }
                     },

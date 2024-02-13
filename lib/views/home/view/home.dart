@@ -65,7 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: EdgeInsets.only(right: 20.w),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+
+                    },
                     child: CircleAvatar(
                       radius: 16.r,
                       child: Image.asset("assets/profile.png",fit: BoxFit.fill,)
@@ -324,7 +326,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       textAlign: TextAlign.start,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(detailsRasto);
+                      },
                       child: Row(
                         children: [
                           Text(

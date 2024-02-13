@@ -60,7 +60,7 @@ class OnbordingScreen extends StatelessWidget {
                           Obx(
                                 ()=> InkWell(
                               onTap: ()=>Get.toNamed(welcome),
-                              child:currentIndex==2?SizedBox(width: 10): Text("Skip",style: TextStyle(
+                              child:currentIndex==2?SizedBox(width: 40): Text("Skip",style: TextStyle(
                                     fontSize: 16.sp,
                                     color:AppColor.fontGrey))
                             ),

@@ -10,10 +10,15 @@ import '../../widgets/customTextFormField.dart';
 import '../../widgets/custom_btn.dart';
 import 'controller/AuthController.dart';
 
-class ChangePassword extends StatelessWidget {
+class ChangePassword extends StatefulWidget {
+  @override
+  State<ChangePassword> createState() => _ChangePasswordState();
+}
+
+class _ChangePasswordState extends State<ChangePassword> {
+  AuthController controller = AuthController();
   @override
   Widget build(BuildContext context) {
-    AuthController controller = AuthController();
     return Form(
       key: controller.formKey,
       child: Scaffold(
@@ -73,14 +78,15 @@ class ChangePassword extends StatelessWidget {
                           print('Form is Not valid');
                         }
                       },
-                      btnTxt: "Reset Password",
+                      btnTxt:(controller.newPass.value.text.isEmpty ||
+                          controller.confirmNewPass.value.text.isEmpty)
+                          ? "Submit":"Reset Password",
                       txtColor: (controller.newPass.value.text.isEmpty ||
-                              controller.confirmNewPass.value.text.isEmpty)
-                          ? AppColor.white: AppColor.grey
-                          ,
+                          controller.confirmNewPass.value.text.isEmpty)
+                          ? AppColor.grey:AppColor.white,
                       btnColor: (controller.newPass.value.text.isEmpty ||
-                              controller.confirmNewPass.value.text.isEmpty)
-                          ? AppColor.green: AppColor.greyLite
+                          controller.confirmNewPass.value.text.isEmpty)
+                          ?  AppColor.greyLite:AppColor.green
                           ),
                 ),
               ),
