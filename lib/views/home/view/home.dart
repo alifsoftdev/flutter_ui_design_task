@@ -70,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: CircleAvatar(
                       radius: 16.r,
+                        backgroundColor: AppColor.white,
                       child: Image.asset("assets/profile.png",fit: BoxFit.fill,)
                     ),
                   ),

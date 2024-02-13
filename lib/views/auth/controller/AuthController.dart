@@ -76,7 +76,7 @@ void authCheck(bool value){
   }
 
   Future<void> deleteUser() async {
-    users.remove(users);
+    users.clear();
     await _saveUsers();
   }
 

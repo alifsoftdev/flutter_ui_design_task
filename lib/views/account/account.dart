@@ -41,7 +41,7 @@ class AccountScreen extends StatelessWidget {
                     ),
                     title: Obx(
                           ()=> Text(
-                        controller.users[2].username??"Name empty",
+                            controller.users.last.name,
                         style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
@@ -50,7 +50,7 @@ class AccountScreen extends StatelessWidget {
                     ),
                     subtitle: Obx(
                           ()=> Text(
-                            controller.users[2].username??"username empty",
+                            controller.users.last.username,
                         style: TextStyle(
                             fontSize: 10.sp,
                             fontWeight: FontWeight.w500,
@@ -118,6 +118,8 @@ class AccountScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(11.r)),
                 child: Column(
                   children: [
+                    options("assets/icons/phone.svg", "Phone",
+                        Icons.arrow_forward_ios,(){}),
                     options("assets/icons/massage.svg", "Language",
                         Icons.arrow_forward_ios,(){}),
                     options("assets/icons/feedback.svg", "Feedback",
@@ -132,7 +134,7 @@ class AccountScreen extends StatelessWidget {
               SizedBox(height: 40,),
               InkWell(
                 onTap: ()async{
-                    await controller.deleteUser();
+                   // await controller.deleteUser();
                     Get.toNamed(welcome);
                 },
                 child: Container(
